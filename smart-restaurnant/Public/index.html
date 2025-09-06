@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smart Restaurant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    #chat-box {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .user, .bot {
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .user {
+      background-color: #daf1ff;
+      text-align: right;
+    }
+    .bot {
+      background-color: #e0e0e0;
+      text-align: left;
+    }
+    #input-box {
+      display: flex;
+      max-width: 500px;
+    }
+    #user-input {
+      flex: 1;
+      padding: 10px;
+    }
+    #send-btn {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to AI Smart Restaurant</h1>
+  <div id="chat-box"></div>
+
+  <div id="input-box">
+    <input type="text" id="user-input" placeholder="Ask something..." />
+    <button id="send-btn"  onclick="sendmsg()">Send</button>
+  </div>
+<script>
+async  function sendmsg(){
+    const input=document.getElementById("user-input").value;
+    const res=await fetch("/api/chat",{
+        method:"POST",
+        headers:{"Content-Type": "application/json"},
+        body:JSON.stringify({input})
+    })
+    const data= await res.json();
+    const chatdiv=document.getElementById("chat-box");
+    chatdiv.innerText+=`You: ${input}\n Bot: ${data.output}\n\n`;
+    document.getElementById("user-input").value="";
+}
+</script>
+  
+
+</body>
+</html>
