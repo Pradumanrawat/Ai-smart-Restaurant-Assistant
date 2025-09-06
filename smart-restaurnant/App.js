@@ -109,3 +109,11 @@ res.status(400).json({output: "Sorry,something went wrong please try again"});
 app.listen(process.env.PORT,(req,res)=>{
     console.log(`server is live at  http://localhost:${process.env.PORT}`);
 })
+
+
+
+
+
+
+
+
